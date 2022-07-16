@@ -2,4 +2,4 @@
 
 A program that keep students grades
 
-<img src="screenShot.png" width="500">
+<img src="secreenShot.png" width="500">
