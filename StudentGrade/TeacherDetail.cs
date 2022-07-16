@@ -66,6 +66,11 @@ namespace StudentGrade
             connection.Close();
         }
 
+        void totalnumber()
+        {
+            lblRealTotalNumber.Text = (int.Parse(lblRealPassedNumbers.Text) + int.Parse(lblRealFailedNumbers.Text)).ToString();
+        }
+
 
         SqlConnection connection = new SqlConnection(@"Data Source=NB3401-0011;Initial Catalog=DbGradesRegistration;Integrated Security=True");
 
@@ -78,6 +83,10 @@ namespace StudentGrade
             failAndPassUpdate();
 
             classAverage();
+
+            totalnumber();
+
+
         }
 
         private void btnStudentAdd_Click(object sender, EventArgs e)
@@ -149,12 +158,18 @@ namespace StudentGrade
 
             failAndPassUpdate();
             classAverage();
+            totalnumber();
 
             MessageBox.Show("Update is succesfull.");
 
             this.tblClassTableAdapter.Fill(this.dbGradesRegistrationDataSet.TblClass);
 
 
-        } 
+        }
+
+        private void lblEvarage_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
