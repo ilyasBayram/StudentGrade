@@ -23,15 +23,49 @@ namespace StudentGrade
         {
             connection.Open();
 
-            SqlCommand passAndfail = new SqlCommand("select count(stuation) from TblClass where stuation='false'", connection);
-            SqlDataReader read = passAndfail.ExecuteReader();
+            SqlCommand fail = new SqlCommand("select count(stuation) from TblClass where stuation='false'", connection);
+
+            SqlDataReader read = fail.ExecuteReader();
+         
+
             while (read.Read())
             {
                 lblRealFailedNumbers.Text = read[0].ToString();
+                
+            }
+
+            connection.Close();
+
+            connection.Open();
+
+            SqlCommand pass = new SqlCommand("select count(stuation) from TblClass where stuation='true'", connection);
+
+            SqlDataReader read2 = pass.ExecuteReader();
+
+            while(read2.Read())
+            {
+                lblRealPassedNumbers.Text = read2[0].ToString();
             }
 
             connection.Close();
         }
+
+        void classAverage()
+        {
+            connection.Open();
+
+            SqlCommand classAverage = new SqlCommand("select sum(average) from TblClass", connection);
+
+            SqlDataReader read3 = classAverage.ExecuteReader();
+
+            while(read3.Read())
+            {
+                lblRealClassEverage.Text = (decimal.Round(((decimal)read3[0])/(decimal.Parse(lblRealPassedNumbers.Text)+decimal.Parse(lblRealFailedNumbers.Text)),2)).ToString();
+            }
+
+            connection.Close();
+        }
+
 
         SqlConnection connection = new SqlConnection(@"Data Source=NB3401-0011;Initial Catalog=DbGradesRegistration;Integrated Security=True");
 
@@ -42,6 +76,8 @@ namespace StudentGrade
             this.tblClassTableAdapter.Fill(this.dbGradesRegistrationDataSet.TblClass);
 
             failAndPassUpdate();
+
+            classAverage();
         }
 
         private void btnStudentAdd_Click(object sender, EventArgs e)
@@ -73,7 +109,7 @@ namespace StudentGrade
             txBoxExam1.Text = dataGridView1.Rows[chosen].Cells[4].Value.ToString();
             txBoxExam2.Text = dataGridView1.Rows[chosen].Cells[5].Value.ToString();
             txBoxExam3.Text = dataGridView1.Rows[chosen].Cells[6].Value.ToString();
-            lblRealEverage.Text = dataGridView1.Rows[chosen].Cells[7].Value.ToString();
+            txBoxStudentAverage.Text = dataGridView1.Rows[chosen].Cells[7].Value.ToString();
 
         }
 
@@ -88,8 +124,9 @@ namespace StudentGrade
             ex2 = Convert.ToDouble(txBoxExam2.Text);
             ex3 = Convert.ToDouble(txBoxExam3.Text);
 
-            everage = (ex1 + ex2 + ex3) / 3;
-            lblRealEverage.Text = everage.ToString();
+            everage = Math.Round(((ex1 + ex2 + ex3) / 3), 2);
+
+            txBoxStudentAverage.Text = everage.ToString();
 
             if (everage >= 50)
                 stuation = "true";
@@ -104,13 +141,14 @@ namespace StudentGrade
             update.Parameters.AddWithValue("@p1", txBoxExam1.Text);
             update.Parameters.AddWithValue("@p2", txBoxExam2.Text);
             update.Parameters.AddWithValue("@p3", txBoxExam3.Text);
-            update.Parameters.AddWithValue("@p4", decimal.Parse(lblRealEverage.Text));
+            update.Parameters.AddWithValue("@p4", decimal.Parse(txBoxStudentAverage.Text));
             update.Parameters.AddWithValue("@p5", stuation);
             update.Parameters.AddWithValue("@p6", mskTxtBoxNuber.Text);
             update.ExecuteNonQuery();
             connection.Close();
 
             failAndPassUpdate();
+            classAverage();
 
             MessageBox.Show("Update is succesfull.");
 

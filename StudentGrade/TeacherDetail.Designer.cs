@@ -31,6 +31,7 @@ namespace StudentGrade
         {
             this.components = new System.ComponentModel.Container();
             this.grpBoxStudentAdd = new System.Windows.Forms.GroupBox();
+            this.mskTxtBoxNuber = new System.Windows.Forms.MaskedTextBox();
             this.txBoxStudentSurname = new System.Windows.Forms.TextBox();
             this.txBoxStudentName = new System.Windows.Forms.TextBox();
             this.btnStudentAdd = new System.Windows.Forms.Button();
@@ -48,15 +49,12 @@ namespace StudentGrade
             this.grpBoxResult = new System.Windows.Forms.GroupBox();
             this.lblRealFailedNumbers = new System.Windows.Forms.Label();
             this.lblRealPassedNumbers = new System.Windows.Forms.Label();
-            this.lblRealEverage = new System.Windows.Forms.Label();
+            this.lblRealClassEverage = new System.Windows.Forms.Label();
             this.lblFailNumbers = new System.Windows.Forms.Label();
             this.lblPassedNumber = new System.Windows.Forms.Label();
             this.lblEvarage = new System.Windows.Forms.Label();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.grpBoxStudentList = new System.Windows.Forms.GroupBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.dbGradesRegistrationDataSet = new StudentGrade.DbGradesRegistrationDataSet();
-            this.tblClassBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.tblClassTableAdapter = new StudentGrade.DbGradesRegistrationDataSetTableAdapters.TblClassTableAdapter();
             this.studentIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.studentNumberDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.studentNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -66,14 +64,18 @@ namespace StudentGrade
             this.studentExam3DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.averageDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.stuationDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.mskTxtBoxNuber = new System.Windows.Forms.MaskedTextBox();
+            this.tblClassBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.dbGradesRegistrationDataSet = new StudentGrade.DbGradesRegistrationDataSet();
+            this.tblClassTableAdapter = new StudentGrade.DbGradesRegistrationDataSetTableAdapters.TblClassTableAdapter();
+            this.txBoxStudentAverage = new System.Windows.Forms.TextBox();
+            this.lblStudentAverage = new System.Windows.Forms.Label();
             this.grpBoxStudentAdd.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.grpBoxResult.SuspendLayout();
-            this.groupBox2.SuspendLayout();
+            this.grpBoxStudentList.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dbGradesRegistrationDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tblClassBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dbGradesRegistrationDataSet)).BeginInit();
             this.SuspendLayout();
             // 
             // grpBoxStudentAdd
@@ -91,6 +93,16 @@ namespace StudentGrade
             this.grpBoxStudentAdd.TabIndex = 0;
             this.grpBoxStudentAdd.TabStop = false;
             this.grpBoxStudentAdd.Text = "Add Student";
+            // 
+            // mskTxtBoxNuber
+            // 
+            this.mskTxtBoxNuber.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.mskTxtBoxNuber.Location = new System.Drawing.Point(148, 54);
+            this.mskTxtBoxNuber.Mask = "0000";
+            this.mskTxtBoxNuber.Name = "mskTxtBoxNuber";
+            this.mskTxtBoxNuber.Size = new System.Drawing.Size(158, 30);
+            this.mskTxtBoxNuber.TabIndex = 6;
+            this.mskTxtBoxNuber.ValidatingType = typeof(int);
             // 
             // txBoxStudentSurname
             // 
@@ -151,6 +163,8 @@ namespace StudentGrade
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.txBoxStudentAverage);
+            this.groupBox1.Controls.Add(this.lblStudentAverage);
             this.groupBox1.Controls.Add(this.txBoxExam3);
             this.groupBox1.Controls.Add(this.txBoxExam2);
             this.groupBox1.Controls.Add(this.btnUpdate);
@@ -184,7 +198,7 @@ namespace StudentGrade
             // btnUpdate
             // 
             this.btnUpdate.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.btnUpdate.Location = new System.Drawing.Point(148, 227);
+            this.btnUpdate.Location = new System.Drawing.Point(137, 277);
             this.btnUpdate.Name = "btnUpdate";
             this.btnUpdate.Size = new System.Drawing.Size(158, 54);
             this.btnUpdate.TabIndex = 1;
@@ -234,7 +248,7 @@ namespace StudentGrade
             // 
             this.grpBoxResult.Controls.Add(this.lblRealFailedNumbers);
             this.grpBoxResult.Controls.Add(this.lblRealPassedNumbers);
-            this.grpBoxResult.Controls.Add(this.lblRealEverage);
+            this.grpBoxResult.Controls.Add(this.lblRealClassEverage);
             this.grpBoxResult.Controls.Add(this.lblFailNumbers);
             this.grpBoxResult.Controls.Add(this.lblPassedNumber);
             this.grpBoxResult.Controls.Add(this.lblEvarage);
@@ -243,7 +257,7 @@ namespace StudentGrade
             this.grpBoxResult.Size = new System.Drawing.Size(332, 378);
             this.grpBoxResult.TabIndex = 7;
             this.grpBoxResult.TabStop = false;
-            this.grpBoxResult.Text = "Result";
+            this.grpBoxResult.Text = "Class Result";
             // 
             // lblRealFailedNumbers
             // 
@@ -265,15 +279,15 @@ namespace StudentGrade
             this.lblRealPassedNumbers.TabIndex = 5;
             this.lblRealPassedNumbers.Text = "00";
             // 
-            // lblRealEverage
+            // lblRealClassEverage
             // 
-            this.lblRealEverage.AutoSize = true;
-            this.lblRealEverage.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.lblRealEverage.Location = new System.Drawing.Point(163, 106);
-            this.lblRealEverage.Name = "lblRealEverage";
-            this.lblRealEverage.Size = new System.Drawing.Size(34, 25);
-            this.lblRealEverage.TabIndex = 4;
-            this.lblRealEverage.Text = "00";
+            this.lblRealClassEverage.AutoSize = true;
+            this.lblRealClassEverage.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.lblRealClassEverage.Location = new System.Drawing.Point(224, 106);
+            this.lblRealClassEverage.Name = "lblRealClassEverage";
+            this.lblRealClassEverage.Size = new System.Drawing.Size(34, 25);
+            this.lblRealClassEverage.TabIndex = 4;
+            this.lblRealClassEverage.Text = "00";
             // 
             // lblFailNumbers
             // 
@@ -301,24 +315,28 @@ namespace StudentGrade
             this.lblEvarage.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.lblEvarage.Location = new System.Drawing.Point(61, 109);
             this.lblEvarage.Name = "lblEvarage";
-            this.lblEvarage.Size = new System.Drawing.Size(96, 25);
+            this.lblEvarage.Size = new System.Drawing.Size(151, 25);
             this.lblEvarage.TabIndex = 0;
-            this.lblEvarage.Text = "Everage :";
+            this.lblEvarage.Text = "Class Everage :";
             // 
-            // groupBox2
+            // grpBoxStudentList
             // 
-            this.groupBox2.Controls.Add(this.dataGridView1);
-            this.groupBox2.Location = new System.Drawing.Point(12, 405);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(1046, 303);
-            this.groupBox2.TabIndex = 8;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "groupBox2";
+            this.grpBoxStudentList.Controls.Add(this.dataGridView1);
+            this.grpBoxStudentList.Location = new System.Drawing.Point(12, 405);
+            this.grpBoxStudentList.Name = "grpBoxStudentList";
+            this.grpBoxStudentList.Size = new System.Drawing.Size(1046, 303);
+            this.grpBoxStudentList.TabIndex = 8;
+            this.grpBoxStudentList.TabStop = false;
+            this.grpBoxStudentList.Text = "Student List";
             // 
             // dataGridView1
             // 
+            this.dataGridView1.AllowUserToAddRows = false;
+            this.dataGridView1.AllowUserToDeleteRows = false;
             this.dataGridView1.AutoGenerateColumns = false;
             this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.dataGridView1.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SunkenHorizontal;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.studentIDDataGridViewTextBoxColumn,
@@ -332,26 +350,16 @@ namespace StudentGrade
             this.stuationDataGridViewCheckBoxColumn});
             this.dataGridView1.DataSource = this.tblClassBindingSource;
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridView1.GridColor = System.Drawing.SystemColors.Control;
             this.dataGridView1.Location = new System.Drawing.Point(3, 22);
+            this.dataGridView1.MultiSelect = false;
             this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersWidth = 62;
+            this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView1.Size = new System.Drawing.Size(1040, 278);
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
-            // 
-            // dbGradesRegistrationDataSet
-            // 
-            this.dbGradesRegistrationDataSet.DataSetName = "DbGradesRegistrationDataSet";
-            this.dbGradesRegistrationDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // tblClassBindingSource
-            // 
-            this.tblClassBindingSource.DataMember = "TblClass";
-            this.tblClassBindingSource.DataSource = this.dbGradesRegistrationDataSet;
-            // 
-            // tblClassTableAdapter
-            // 
-            this.tblClassTableAdapter.ClearBeforeFill = true;
             // 
             // studentIDDataGridViewTextBoxColumn
             // 
@@ -367,6 +375,7 @@ namespace StudentGrade
             this.studentNumberDataGridViewTextBoxColumn.HeaderText = "StudentNumber";
             this.studentNumberDataGridViewTextBoxColumn.MinimumWidth = 8;
             this.studentNumberDataGridViewTextBoxColumn.Name = "studentNumberDataGridViewTextBoxColumn";
+            this.studentNumberDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // studentNameDataGridViewTextBoxColumn
             // 
@@ -374,6 +383,7 @@ namespace StudentGrade
             this.studentNameDataGridViewTextBoxColumn.HeaderText = "StudentName";
             this.studentNameDataGridViewTextBoxColumn.MinimumWidth = 8;
             this.studentNameDataGridViewTextBoxColumn.Name = "studentNameDataGridViewTextBoxColumn";
+            this.studentNameDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // studentSurnameDataGridViewTextBoxColumn
             // 
@@ -381,6 +391,7 @@ namespace StudentGrade
             this.studentSurnameDataGridViewTextBoxColumn.HeaderText = "StudentSurname";
             this.studentSurnameDataGridViewTextBoxColumn.MinimumWidth = 8;
             this.studentSurnameDataGridViewTextBoxColumn.Name = "studentSurnameDataGridViewTextBoxColumn";
+            this.studentSurnameDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // studentExam1DataGridViewTextBoxColumn
             // 
@@ -388,6 +399,7 @@ namespace StudentGrade
             this.studentExam1DataGridViewTextBoxColumn.HeaderText = "StudentExam1";
             this.studentExam1DataGridViewTextBoxColumn.MinimumWidth = 8;
             this.studentExam1DataGridViewTextBoxColumn.Name = "studentExam1DataGridViewTextBoxColumn";
+            this.studentExam1DataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // studentExam2DataGridViewTextBoxColumn
             // 
@@ -395,6 +407,7 @@ namespace StudentGrade
             this.studentExam2DataGridViewTextBoxColumn.HeaderText = "StudentExam2";
             this.studentExam2DataGridViewTextBoxColumn.MinimumWidth = 8;
             this.studentExam2DataGridViewTextBoxColumn.Name = "studentExam2DataGridViewTextBoxColumn";
+            this.studentExam2DataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // studentExam3DataGridViewTextBoxColumn
             // 
@@ -402,6 +415,7 @@ namespace StudentGrade
             this.studentExam3DataGridViewTextBoxColumn.HeaderText = "StudentExam3";
             this.studentExam3DataGridViewTextBoxColumn.MinimumWidth = 8;
             this.studentExam3DataGridViewTextBoxColumn.Name = "studentExam3DataGridViewTextBoxColumn";
+            this.studentExam3DataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // averageDataGridViewTextBoxColumn
             // 
@@ -409,6 +423,7 @@ namespace StudentGrade
             this.averageDataGridViewTextBoxColumn.HeaderText = "Average";
             this.averageDataGridViewTextBoxColumn.MinimumWidth = 8;
             this.averageDataGridViewTextBoxColumn.Name = "averageDataGridViewTextBoxColumn";
+            this.averageDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // stuationDataGridViewCheckBoxColumn
             // 
@@ -416,16 +431,40 @@ namespace StudentGrade
             this.stuationDataGridViewCheckBoxColumn.HeaderText = "Stuation";
             this.stuationDataGridViewCheckBoxColumn.MinimumWidth = 8;
             this.stuationDataGridViewCheckBoxColumn.Name = "stuationDataGridViewCheckBoxColumn";
+            this.stuationDataGridViewCheckBoxColumn.ReadOnly = true;
             // 
-            // mskTxtBoxNuber
+            // tblClassBindingSource
             // 
-            this.mskTxtBoxNuber.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.mskTxtBoxNuber.Location = new System.Drawing.Point(148, 54);
-            this.mskTxtBoxNuber.Mask = "0000";
-            this.mskTxtBoxNuber.Name = "mskTxtBoxNuber";
-            this.mskTxtBoxNuber.Size = new System.Drawing.Size(158, 30);
-            this.mskTxtBoxNuber.TabIndex = 6;
-            this.mskTxtBoxNuber.ValidatingType = typeof(int);
+            this.tblClassBindingSource.DataMember = "TblClass";
+            this.tblClassBindingSource.DataSource = this.dbGradesRegistrationDataSet;
+            // 
+            // dbGradesRegistrationDataSet
+            // 
+            this.dbGradesRegistrationDataSet.DataSetName = "DbGradesRegistrationDataSet";
+            this.dbGradesRegistrationDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // tblClassTableAdapter
+            // 
+            this.tblClassTableAdapter.ClearBeforeFill = true;
+            // 
+            // txBoxStudentAverage
+            // 
+            this.txBoxStudentAverage.Enabled = false;
+            this.txBoxStudentAverage.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.txBoxStudentAverage.Location = new System.Drawing.Point(137, 201);
+            this.txBoxStudentAverage.Name = "txBoxStudentAverage";
+            this.txBoxStudentAverage.Size = new System.Drawing.Size(158, 30);
+            this.txBoxStudentAverage.TabIndex = 10;
+            // 
+            // lblStudentAverage
+            // 
+            this.lblStudentAverage.AutoSize = true;
+            this.lblStudentAverage.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.lblStudentAverage.Location = new System.Drawing.Point(20, 200);
+            this.lblStudentAverage.Name = "lblStudentAverage";
+            this.lblStudentAverage.Size = new System.Drawing.Size(102, 25);
+            this.lblStudentAverage.TabIndex = 9;
+            this.lblStudentAverage.Text = "Average : ";
             // 
             // TeacherDetail
             // 
@@ -433,7 +472,7 @@ namespace StudentGrade
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(149)))), ((int)(((byte)(165)))), ((int)(((byte)(166)))));
             this.ClientSize = new System.Drawing.Size(1112, 720);
-            this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.grpBoxStudentList);
             this.Controls.Add(this.grpBoxResult);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.grpBoxStudentAdd);
@@ -446,10 +485,10 @@ namespace StudentGrade
             this.groupBox1.PerformLayout();
             this.grpBoxResult.ResumeLayout(false);
             this.grpBoxResult.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
+            this.grpBoxStudentList.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dbGradesRegistrationDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tblClassBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dbGradesRegistrationDataSet)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -475,10 +514,10 @@ namespace StudentGrade
         private System.Windows.Forms.TextBox txBoxExam3;
         private System.Windows.Forms.TextBox txBoxExam2;
         private System.Windows.Forms.TextBox txBoxExam1;
-        private System.Windows.Forms.Label lblRealEverage;
+        private System.Windows.Forms.Label lblRealClassEverage;
         private System.Windows.Forms.Label lblRealFailedNumbers;
         private System.Windows.Forms.Label lblRealPassedNumbers;
-        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox grpBoxStudentList;
         private System.Windows.Forms.DataGridView dataGridView1;
         private DbGradesRegistrationDataSet dbGradesRegistrationDataSet;
         private System.Windows.Forms.BindingSource tblClassBindingSource;
@@ -493,5 +532,7 @@ namespace StudentGrade
         private System.Windows.Forms.DataGridViewTextBoxColumn averageDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewCheckBoxColumn stuationDataGridViewCheckBoxColumn;
         private System.Windows.Forms.MaskedTextBox mskTxtBoxNuber;
+        private System.Windows.Forms.TextBox txBoxStudentAverage;
+        private System.Windows.Forms.Label lblStudentAverage;
     }
 }
