@@ -149,7 +149,7 @@ namespace StudentGrade
             this.lblStudentGrade3.AutoSize = true;
             this.lblStudentGrade3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.lblStudentGrade3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(73)))), ((int)(((byte)(94)))));
-            this.lblStudentGrade3.Location = new System.Drawing.Point(143, 347);
+            this.lblStudentGrade3.Location = new System.Drawing.Point(145, 347);
             this.lblStudentGrade3.Name = "lblStudentGrade3";
             this.lblStudentGrade3.Size = new System.Drawing.Size(41, 29);
             this.lblStudentGrade3.TabIndex = 9;
@@ -160,7 +160,7 @@ namespace StudentGrade
             this.lblStudentRealAvarage.AutoSize = true;
             this.lblStudentRealAvarage.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.lblStudentRealAvarage.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(73)))), ((int)(((byte)(94)))));
-            this.lblStudentRealAvarage.Location = new System.Drawing.Point(143, 417);
+            this.lblStudentRealAvarage.Location = new System.Drawing.Point(155, 417);
             this.lblStudentRealAvarage.Name = "lblStudentRealAvarage";
             this.lblStudentRealAvarage.Size = new System.Drawing.Size(41, 29);
             this.lblStudentRealAvarage.TabIndex = 11;
@@ -182,7 +182,7 @@ namespace StudentGrade
             this.lblStudentRealStuation.AutoSize = true;
             this.lblStudentRealStuation.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.lblStudentRealStuation.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(73)))), ((int)(((byte)(94)))));
-            this.lblStudentRealStuation.Location = new System.Drawing.Point(143, 488);
+            this.lblStudentRealStuation.Location = new System.Drawing.Point(155, 488);
             this.lblStudentRealStuation.Name = "lblStudentRealStuation";
             this.lblStudentRealStuation.Size = new System.Drawing.Size(41, 29);
             this.lblStudentRealStuation.TabIndex = 13;

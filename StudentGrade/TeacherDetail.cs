@@ -18,13 +18,30 @@ namespace StudentGrade
             InitializeComponent();
         }
 
+
+        void failAndPassUpdate()
+        {
+            connection.Open();
+
+            SqlCommand passAndfail = new SqlCommand("select count(stuation) from TblClass where stuation='false'", connection);
+            SqlDataReader read = passAndfail.ExecuteReader();
+            while (read.Read())
+            {
+                lblRealFailedNumbers.Text = read[0].ToString();
+            }
+
+            connection.Close();
+        }
+
         SqlConnection connection = new SqlConnection(@"Data Source=NB3401-0011;Initial Catalog=DbGradesRegistration;Integrated Security=True");
+
 
         private void TeacherDetail_Load(object sender, EventArgs e)
         {
             // TODO: This line of code loads data into the 'dbGradesRegistrationDataSet.TblClass' table. You can move, or remove it, as needed.
             this.tblClassTableAdapter.Fill(this.dbGradesRegistrationDataSet.TblClass);
 
+            failAndPassUpdate();
         }
 
         private void btnStudentAdd_Click(object sender, EventArgs e)
@@ -56,11 +73,16 @@ namespace StudentGrade
             txBoxExam1.Text = dataGridView1.Rows[chosen].Cells[4].Value.ToString();
             txBoxExam2.Text = dataGridView1.Rows[chosen].Cells[5].Value.ToString();
             txBoxExam3.Text = dataGridView1.Rows[chosen].Cells[6].Value.ToString();
+            lblRealEverage.Text = dataGridView1.Rows[chosen].Cells[7].Value.ToString();
+
         }
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
             double everage, ex1, ex2, ex3;
+            string stuation;
+
+          
 
             ex1 = Convert.ToDouble(txBoxExam1.Text);
             ex2 = Convert.ToDouble(txBoxExam2.Text);
@@ -69,15 +91,32 @@ namespace StudentGrade
             everage = (ex1 + ex2 + ex3) / 3;
             lblRealEverage.Text = everage.ToString();
 
+            if (everage >= 50)
+                stuation = "true";
+            else
+                stuation = "false";
+
+
             connection.Open();
 
-            SqlCommand update = new SqlCommand("update TblClass set (StudentExam1=@p1, StudnetExam2=@p2, StudentExam3=@p3, Average=@p4, Situation=@p5 where StudentNumber=@p6", connection);
+            SqlCommand update = new SqlCommand("update TblClass set StudentExam1=@p1, StudentExam2=@p2, StudentExam3=@p3, Average=@p4, Stuation=@p5 where StudentNumber=@p6", connection);
 
             update.Parameters.AddWithValue("@p1", txBoxExam1.Text);
             update.Parameters.AddWithValue("@p2", txBoxExam2.Text);
             update.Parameters.AddWithValue("@p3", txBoxExam3.Text);
-            update.Parameters.AddWithValue("@p4", lblRealEverage.Text);
-            update.Parameters.AddWithValue("@p5", lbl.Text);
+            update.Parameters.AddWithValue("@p4", decimal.Parse(lblRealEverage.Text));
+            update.Parameters.AddWithValue("@p5", stuation);
+            update.Parameters.AddWithValue("@p6", mskTxtBoxNuber.Text);
+            update.ExecuteNonQuery();
+            connection.Close();
+
+            failAndPassUpdate();
+
+            MessageBox.Show("Update is succesfull.");
+
+            this.tblClassTableAdapter.Fill(this.dbGradesRegistrationDataSet.TblClass);
+
+
         } 
     }
 }

@@ -37,7 +37,7 @@ namespace StudentGrade
                 lblStudentGrade2.Text = read[5].ToString();
                 lblStudentGrade3.Text = read[6].ToString();
                 lblStudentRealAvarage.Text = read[7].ToString();
-                lblStudentRealStuation.Text = read[8].ToString();
+                lblStudentRealStuation.Text = read[8].ToString() == "True"? "Passed":"Failed";
             }
 
             connection.Close();
